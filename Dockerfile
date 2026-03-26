@@ -1,16 +1,17 @@
-# Simple Dockerfile for the Express backend (server.js).
-# React frontend is run separately (or you can build/serve it later).
-
+# Dockerfile for Express backend in backend/ folder
 FROM node:20-alpine
 
+# Set working directory inside container
 WORKDIR /app
 
-# Install dependencies first for better layer caching
-COPY package*.json ./
+# Copy backend package files
+COPY backend/package*.json ./
+
+# Install backend dependencies
 RUN npm install
 
-# Copy application code
-COPY . .
+# Copy backend source code
+COPY backend/. .
 
 EXPOSE 3000
 
